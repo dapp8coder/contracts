@@ -6,7 +6,7 @@ pragma solidity >=0.4.21 <0.7.0;
 //
 // * @license Apache2.0
 
-contract BattlePoker {
+contract Battle {
     // Bet ether limitation
     uint constant betUnitMinEther = 0.15 ether;
     uint constant betUnitMaxEther = 135 ether;
@@ -151,8 +151,8 @@ contract BattlePoker {
     function allocateFunds() internal {
         require(players.length >= 2, 'No player joined');
 
-        // gas fee and 1% service charge
-        uint serviceCharge = betPoolAddress.balance / 100;
+        // 2% service charge
+        uint serviceCharge = betPoolAddress.balance / 50;
         serviceChargeAddress.transfer(serviceCharge);
 
         // Amount assign
