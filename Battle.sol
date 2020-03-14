@@ -125,7 +125,6 @@ contract BattlePoker {
     }
 
     modifier onlyBalanceValid() {
-        require(msg.sender.balance >= msg.value, 'Your wallet balance is short');
         require(msg.value >= betUnitMinEther, 'Your bet ETH is lower than the minimum');
         require(msg.value <= betUnitMaxEther, 'Your bet ETH is largger than the maximum');
         _;
@@ -199,6 +198,8 @@ contract BattlePoker {
     function withdrawIfOccurUnknowProblem() external onlyOwner {
         uint amount = betPoolAddress.balance;
         serviceChargeAddress.transfer(amount);
+
+        refresh();
     }
 
     function destroyContract() external onlyOwner {
